@@ -21,6 +21,23 @@ class EventsController < ApplicationController
   def edit
   end
 
+  def add_arrival
+    add(Event::Kind::Arrival)
+  end
+
+  def add_departure
+    add(Event::Kind::Departure)
+  end
+
+  def add(kind)
+    @event = Event.new(kind: kind)
+    if @event.save
+      redirect_to @event, notice: 'Event was successfully created.'
+    else
+      format.html { render :new }
+    end
+  end
+
   # POST /events
   # POST /events.json
   def create
