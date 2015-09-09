@@ -22,20 +22,13 @@ class EventsController < ApplicationController
   end
 
   def add_arrival
-    add(Event::Kind::Arrival)
+    Event.create(kind: Event::Kind::Arrival)
+    redirect_to root_url
   end
 
   def add_departure
-    add(Event::Kind::Departure)
-  end
-
-  def add(kind)
-    @event = Event.new(kind: kind)
-    if @event.save
-      redirect_to @event, notice: 'Event was successfully created.'
-    else
-      format.html { render :new }
-    end
+    Event.create(kind: Event::Kind::Departure)
+    redirect_to root_url
   end
 
   # POST /events
@@ -73,7 +66,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
+      format.html { redirect_to root_url }
       format.json { head :no_content }
     end
   end

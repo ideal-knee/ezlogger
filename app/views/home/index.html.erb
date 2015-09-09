@@ -1,1 +1,22 @@
-<p>hello world</p>
+<form action="/add_departure"><input type="submit" value="Log Departure" style="width: 100%"></form>
+<br />
+<form action="/add_arrival"><input type="submit" value="Log Arrival" style="width: 100%"></form>
+<br />
+
+<table>
+  <tr>
+    <th>Time</th>
+    <th>Description</th>
+    <th>&nbsp;</th>
+  </tr>
+
+  <% @events.each do |event| %>
+    <tr>
+      <td><%= event.created_at %></td>
+      <td><%= event.kind %></td>
+      <td><%= link_to 'D', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><a href="<%= data_csv_path %>">Download</a></p>

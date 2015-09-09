@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   # Example of regular route:
   get 'add_arrival' => 'events#add_arrival'
   get 'add_departure' => 'events#add_departure'
+  get 'data.csv' => 'home#csv', as: 'data_csv'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
