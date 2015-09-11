@@ -12,7 +12,7 @@
 
   <% @events.each do |event| %>
     <tr>
-      <td><%= event.created_at %></td>
+      <td><%= event.created_at.in_time_zone("Eastern Time (US & Canada)").to_formatted_s(:long) %></td>
       <td><%= event.kind %></td>
       <td><%= link_to 'D', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>

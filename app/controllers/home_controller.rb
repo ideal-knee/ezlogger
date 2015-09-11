@@ -21,7 +21,7 @@ class HomeController < ApplicationController
           event.kind,
           event.created_at.strftime("%Y-%m-%d"),
           event.created_at.to_i,
-          event.created_at.to_formatted_s(:rfc822),
+          event.created_at.in_time_zone("Eastern Time (US & Canada)").to_formatted_s(:rfc822),
         ]
       end
     end)
