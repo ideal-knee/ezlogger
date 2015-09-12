@@ -71,6 +71,11 @@ class EventsController < ApplicationController
     end
   end
 
+  def delete_all
+    Event.all.delete_all
+    redirect_to root_url
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event

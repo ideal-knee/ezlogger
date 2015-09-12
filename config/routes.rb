@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'add_arrival' => 'events#add_arrival'
   get 'add_departure' => 'events#add_departure'
   get 'data.csv' => 'home#csv', as: 'data_csv'
+  get 'delete_all_events' => 'events#delete_all', as: 'delete_all'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
