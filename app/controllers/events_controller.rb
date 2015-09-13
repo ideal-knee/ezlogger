@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.order("created_at DESC")
   end
 
   # GET /events/1
@@ -66,7 +66,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to root_url }
+      format.html { redirect_to events_url }
       format.json { head :no_content }
     end
   end

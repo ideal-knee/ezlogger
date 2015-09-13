@@ -6,6 +6,28 @@ class Trip
     @arrival = params[:arrival]
   end
 
+  def date
+    departure.try(:created_at).try(:to_date) || arrival.try(:created_at).try(:to_date)
+  end
+
+  def departure_time
+    departure.created_at.in_time_zone("Eastern Time (US & Canada)").to_s(:time) if departure
+  end
+
+  def arrival_time
+    arrival.created_at.in_time_zone("Eastern Time (US & Canada)").to_s(:time) if arrival
+  end
+
+  def duration
+    return nil unless departure && arrival
+
+    arrival.created_at - departure.created_at
+  end
+
+  def duration_string
+    Time.at(duration).utc.strftime("%H:%M:%S") if duration
+  end
+
   def to_s
     "Trip (#{departure.try(:created_at) || "?"} --> #{arrival.try(:created_at) || "?"})"
   end

@@ -5,19 +5,22 @@
 
 <table>
   <tr>
-    <th>Time</th>
-    <th>Description</th>
-    <th>&nbsp;</th>
+    <th>Date</th>
+    <th>Departure Time</th>
+    <th>Arrival Time</th>
+    <th>Duration</th>
   </tr>
 
-  <% @events.each do |event| %>
+  <% @trips.each do |trip| %>
     <tr>
-      <td><%= event.created_at.in_time_zone("Eastern Time (US & Canada)").to_formatted_s(:long) %></td>
-      <td><%= event.kind %></td>
-      <td><%= link_to 'D', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= trip.date %></td>
+      <td><%= trip.departure_time %></td>
+      <td><%= trip.arrival_time %></td>
+      <td><%= trip.duration_string %></td>
     </tr>
   <% end %>
 </table>
 
-<p><a href="<%= data_csv_path %>">Download</a></p>
+<p><%= link_to 'Download', data_csv_path %></p>
+<p><%= link_to 'Edit raw events', events_path %></p>
 <p><%= link_to 'Clear all', delete_all_path, data: { confirm: 'Are you sure?' } %></p>

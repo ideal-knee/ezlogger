@@ -1,29 +1,31 @@
 class HomeController < ApplicationController
   def index
-    @events = Event.all.order("created_at DESC").limit(20)
+    @trips = Trip.all.reverse
   end
 
   def csv
     require 'csv'
 
-    events = Event.all
+    trips = Trip.all
 
-    send_data(CSV.generate do |csv|
-      csv << [
-        "event",
-        "date",
-        "seconds",
-        "rfc822",
-      ]
-
-      events.each do |event|
+    send_data(
+      CSV.generate do |csv|
         csv << [
-          event.kind,
-          event.created_at.strftime("%Y-%m-%d"),
-          event.created_at.to_i,
-          event.created_at.in_time_zone("Eastern Time (US & Canada)").to_formatted_s(:rfc822),
+          "date",
+          "departure time",
+          "arrival time",
+          "duration",
         ]
+
+        trips.each do |trip|
+          csv << [
+            trip.date,
+            trip.departure_time,
+            trip.arrival_time,
+            trip.duration,
+          ]
+        end
       end
-    end)
+    )
   end
 end

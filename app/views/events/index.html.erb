@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Created At</th>
       <th>Kind</th>
       <th colspan="3"></th>
     </tr>
@@ -13,6 +14,7 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
+        <td><%= event.created_at %></td>
         <td><%= event.kind %></td>
         <td><%= link_to 'Show', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
@@ -24,4 +26,5 @@
 
 <br>
 
-<%= link_to 'New Event', new_event_path %>
+<p><%= link_to 'New Event', new_event_path %></p>
+<p><%= link_to 'Home', root_path %></p>
