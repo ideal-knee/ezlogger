@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>Created At</th>
+      <th>Time</th>
       <th>Kind</th>
       <th colspan="3"></th>
     </tr>
@@ -14,7 +14,7 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= event.created_at %></td>
+        <td><%= event.timestamp.to_s(:long) %></td>
         <td><%= event.kind %></td>
         <td><%= link_to 'Show', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>

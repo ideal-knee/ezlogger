@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.order("created_at DESC")
+    @events = Event.order("timestamp DESC")
   end
 
   # GET /events/1
@@ -22,12 +22,12 @@ class EventsController < ApplicationController
   end
 
   def add_arrival
-    Event.create(kind: Event::Kind::Arrival)
+    Event.create(kind: Event::Kind::Arrival, timestamp: Time.zone.now)
     redirect_to root_url
   end
 
   def add_departure
-    Event.create(kind: Event::Kind::Departure)
+    Event.create(kind: Event::Kind::Departure, timestamp: Time.zone.now)
     redirect_to root_url
   end
 
@@ -38,7 +38,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        format.html { redirect_to events_url, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
@@ -52,7 +52,7 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.html { redirect_to events_url, notice: 'Event was successfully updated.' }
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit }
@@ -84,6 +84,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:kind)
+      params.require(:event).permit(:kind, :timestamp)
     end
 end
