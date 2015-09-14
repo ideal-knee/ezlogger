@@ -11,11 +11,11 @@ class Trip
   end
 
   def departure_time
-    departure.created_at.in_time_zone("Eastern Time (US & Canada)").to_s(:time) if departure
+    departure.created_at.to_s(:time) if departure
   end
 
   def arrival_time
-    arrival.created_at.in_time_zone("Eastern Time (US & Canada)").to_s(:time) if arrival
+    arrival.created_at.to_s(:time) if arrival
   end
 
   def duration
